@@ -3,4 +3,4 @@ This code is a simple betting game where players choose a color (Red, Black, or 
 
 
 
-on row 98 there is a randomizer funtion that decides the ods of the game (if you change the index then u change the ods ow winning)
+on row 98 there is a randomizer funtion that decides the ods of the game (if you change the index then u change the ods ow winning). This is all u need for the server!
