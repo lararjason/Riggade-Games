@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    border: 8px solid #333;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: white;
+    width: 50%;
+    max-width: 800px;
+    margin: 30px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.slot-machine {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    border: 6px solid #333;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.slot {
+    width: 80px;
+    height: 80px;
+    background-color: #2b59e5;
+    border: 3px solid #333;
+    margin: 0 15px;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.message {
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+#playerMoney {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+#betAmount {
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 200px;
+    border-radius: 5px;
+    border: 2px solid #333;
+}
+
+#spinButton {
+    font-size: 20px;
+    padding: 12px 20px;
+    background-color: #2b59e5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#spinButton:hover {
+    background-color: #1a3c9e;
+    transition: background-color 0.3s;
+}
