@@ -1,0 +1,79 @@
+
+
+
+.input-div h1{
+    color:$mainColorTxt;
+}
+
+.input-div span h1{
+    color:$subColorTxt;
+}
+
+
+.colors button{
+    margin-top: 10px;
+    border: 0;
+    outline: 0;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 900;
+    color: white;
+    cursor: pointer;
+}
+
+.colors{ 
+    
+    #Green {
+    background-color: $greenBox;
+}
+
+    #Red{
+        background-color: $redBox;
+    }
+
+    #Black{
+        background-color: $blackBox;
+    }
+}
+
+.container #bet{
+    outline: none;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+
+.results{
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 28px;
+    min-height: 50px;
+    background-color: lightgoldenrodyellow;
+    border-radius: 20px 20px 20px 20px;
+
+}
+
+.playAgainButton{
+    margin-top: 10px;
+    border: 0;
+    outline: 0;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 900;
+    color: black;
+    cursor: pointer;
+}
+
+.spinner{
+    color: greenyellow;
+    
+    margin-top: 10px;
+    border: 0;
+    outline: 0;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 900;
+    font-size: 100px;
+}
