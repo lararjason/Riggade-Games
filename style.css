@@ -1,0 +1,180 @@
+body {
+    background-color: rgb(52, 52, 52);
+    overflow: hidden;
+}
+
+.balanceContainer {
+    float: right;
+    display: flex;
+    .balanceText {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 5vw;
+        color: green;
+        position: relative;
+        top: -7vh;
+    }
+    .balanceImg {
+        width: 5vw;
+        height: 5vw;
+    }
+}
+
+.settingsStyle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25vw;
+    height: 100vw;
+    background-color: rgb(92, 104, 155);
+    text-align: center;
+    .inputTitle {
+        position: relative;
+        top: 20vh;
+    }
+    .settingsInput {
+        width: 20vw;
+        background-color: transparent;
+        border: none;
+        border-bottom: 0.1vw solid black;
+        position: relative;
+        top: 20vw;
+        text-align: center;
+        font-size: 3vw;
+    }
+}
+
+.cylinder {
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 100%;
+    background-color: black;
+    z-index: 1;
+    .bulletHole {
+        width: 10%;
+        height: 10%;
+        border-radius: 100%;
+        background-color: white;
+        z-index: 20;
+    }
+}
+
+.barrel {
+    width: 1vw;
+    height: 10vh;
+    background-color: grey;
+    position: absolute;
+    left: 49.6vw;
+    top: 20vh;
+    z-index: 1;
+}
+
+.inputContainer {
+    position: relative;
+    top: 20vh;
+}
+
+.startButton {
+    width: 15vw;
+    height: 8vh;
+    position: absolute;
+    top: 60vh;
+    left: 5vw;
+    background-color: green;
+    border: 0.1vw solid black;
+    font-size: 2vw;
+}
+
+.winLoseText {
+    font-size: 4.25vw;
+    position: absolute;
+    left: 0vw;
+    bottom: 0;
+    z-index: 1;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: white;
+    border: 1vw solid blue;
+    text-align: center;
+}
+
+.imgStyle {
+    position: absolute;
+    left: 70vw;
+    top: 20vw;
+    width: 15vw;
+    height: auto;
+}
+
+@keyframes flash {
+    0% {
+        background-color: transparent;
+    }
+    100% {
+        background-color: white;
+    }
+}
+
+@keyframes hole0 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes hole1 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(771deg);
+    }
+}
+
+@keyframes hole2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(822deg);
+    }
+}
+
+@keyframes hole3 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(874deg);
+    }
+}
+
+@keyframes hole4 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(925deg);
+    }
+}
+
+@keyframes hole5 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(977deg);
+    }
+}
+
+@keyframes hole6 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(1028deg);
+    }
+}
