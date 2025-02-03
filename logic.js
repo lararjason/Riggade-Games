@@ -1,13 +1,29 @@
 document.addEventListener("DOMContentLoaded", function() {
     var game = document.body;
 
+    var infoContainer = document.createElement("div");
+    infoContainer.classList = "infoContainer";
+    game.appendChild(infoContainer);
+
+    infoContainer.addEventListener("click", function() {
+        infoContainer.style.visibility = "hidden";
+    })
+
+    var infoTitle = document.createElement("h1");
+    infoTitle.innerHTML = "Regler:";
+    infoContainer.appendChild(infoTitle);
+
+    var infoText = document.createElement("p");
+    infoText.innerHTML = "Skriv in hur mycket KjellBucks du vill gambla med. Klicka sedan på minst 4 skott och hoppas att kaninen inte blir skjuten! Klicka vart som för att gå vidare";
+    infoContainer.appendChild(infoText);
+
     var bunny = document.createElement("img");
     game.appendChild(bunny);
-    bunny.classList = "imgStyle"
+    bunny.classList = "imgStyle";
     bunny.src = "https://i.ibb.co/1nJzcMf/image.png";
-    bunny.style.transform = "rotate(0deg)"
+    bunny.style.transform = "rotate(0deg)";
 
-
+    var activeBullets = 0;
     var inputTimes = 1;
     var inputBet = 0;
     var balance = 200;
@@ -28,104 +44,67 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var settings = document.createElement("div");
     game.appendChild(settings);
-    settings.classList = "settingsStyle"
+    settings.classList = "settingsStyle";
+    
+    var betCheck = document.createElement("p");
+    betCheck.classList = "betCheck";
+    settings.appendChild(betCheck);
+
+    var startRestartButtonContainer = document.createElement("div");
+    startRestartButtonContainer.classList = "startRestartButtonContainer";
+    settings.appendChild(startRestartButtonContainer);
+
+    var startButton = document.createElement("button");
+    startRestartButtonContainer.appendChild(startButton);
+    startButton.id = "start-button";
+    startButton.classList = "startButtonOff";
+    startButton.innerHTML = "Starta Selet";
+
+    var restartButton = document.createElement("button");
+    startRestartButtonContainer.appendChild(restartButton);
+    restartButton.id = "restart-button";
+    restartButton.classList = "restartButton";
+    restartButton.innerHTML = "Spela Igen?";
 
     var inputBetTitle = document.createElement("p");
     settings.appendChild(inputBetTitle);
     inputBetTitle.classList = "";
     inputBetTitle.id = "input-title"
-    inputBetTitle.innerHTML = "Dina " + balance + " KjellBucks multipliceras med " + inputTimes;
-
-    var inputTitle = document.createElement("p");
-    inputTitle.innerHTML = "Placera Ditt Bett Här";
-    inputTitle.classList = "inputTitle";
-    settings.appendChild(inputTitle);
-
-    
-    var startButton = document.createElement("button");
-    settings.appendChild(startButton);
-    startButton.id = "start-button";
-    startButton.classList = "startButton";
-    startButton.innerHTML = "Start Game";
-    startButton.style.display = "";
-    startButton.style.display = "none";
-
-    var winLose = document.createElement("h1");
-
-    winLose.classList = "winLoseText";
-    winLose.style.display = "none";
-
-    game.appendChild(winLose);
+    inputBetTitle.innerHTML = "Dina " + 0 + " KjellBucks multipliceras med " + inputTimes;
 
     var inputContainer = document.createElement("div");
     settings.appendChild(inputContainer);
-    inputContainer.classList = "inputContainer"
+    inputContainer.classList = "inputContainer";
 
-    var input1 = document.createElement("button");
-    inputContainer.appendChild(input1);
-    input1.innerHTML = "1";
+    var addContainer = document.createElement("div");
+    inputContainer.appendChild(addContainer);
+    addContainer.classList = "addContainer";
 
-    var input10 = document.createElement("button");
-    inputContainer.appendChild(input10);
-    input10.innerHTML = "10";
+    var input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Lägg In Dina KjellBucks Här!";
+    addContainer.appendChild(input);
 
-    var input100 = document.createElement("button");
-    inputContainer.appendChild(input100);
-    input100.innerHTML = "100";
-
-    var clearInput = document.createElement("button");
-    inputContainer.appendChild(clearInput);
-    clearInput.innerHTML = "Ta tillbaka";
-
-    var inputAmount = document.createElement("p")
-    inputAmount.innerHTML = inputBet;
-    inputContainer.appendChild(inputAmount);
-
-    input1.addEventListener("click", function() {
-        if (balance >= 0) {
-            inputBet++;
-            balanceText.innerHTML = balance-inputBet;
-            inputAmount.innerHTML = inputBet;
-        }
-        if (bulletList.includes("active") ) {
-            startButton.style.display = "";
+    input.oninput = function() {
+        if (isNaN(input.value) || Number(input.value) < 1) {
+            startButton.classList= "startButtonOff";
+            betCheck.innerHTML = "Lägg In Tal För Att Gambla!";
         } else {
-            startButton.style.display = "none";
+            if (Number(input.value) > balance) {
+                startButton.classList= "startButtonOff";
+                betCheck.innerHTML = "Du Har Inte Så Mycket KjellBucks!";
+            } else {
+                betCheck.innerHTML = "";
+                inputBet = Math.floor(Number(input.value));
+                inputBetTitle.innerHTML = "Dina " + inputBet + " KjellBucks multipliceras med " + inputTimes;
+                if (activeBullets > 3 && inputBet > 0) {
+                    startButton.classList= "startButtonOn";
+                } else {
+                    startButton.classList= "startButtonOff";
+                }
+            }
         }
-    })
-
-    input10.addEventListener("click", function() {
-        if (balance >= 10) {
-            inputBet+=10;
-            balanceText.innerHTML = balance-inputBet;
-            inputAmount.innerHTML = inputBet;
-        }
-        if (bulletList.includes("active") ) {
-            startButton.style.display = "";
-        } else {
-            startButton.style.display = "none";
-        }
-    })
-
-    input100.addEventListener("click", function() {
-        if (balance >= 100) {
-            inputBet+=100;
-            balanceText.innerHTML = balance-inputBet;
-            inputAmount.innerHTML = inputBet;
-        }
-        if (bulletList.includes("active") ) {
-            startButton.style.display = "";
-        } else {
-            startButton.style.display = "none";
-        }
-    })
-
-    clearInput.addEventListener("click", function() {
-        inputBet = 0;
-        balanceText.innerHTML = balance+inputBet;
-        inputAmount.innerHTML = inputBet;
-    })
-
+    }
 
     var flashBang = document.createElement("div");
     game.appendChild(flashBang);
@@ -139,10 +118,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var bulletList = ["blank", "blank", "blank", "blank", "blank", "blank", "blank"];
     
+    var gunCylinderContainer = document.createElement("div");
+    gunCylinderContainer.classList = "gunCylinderContainer";
+    game.appendChild(gunCylinderContainer);
+
     var cylinderDiv = document.createElement("div");
     cylinderDiv.classList = "cylinder";
     cylinderDiv.id = "cylinderId";
-    game.appendChild(cylinderDiv);
+    gunCylinderContainer.appendChild(cylinderDiv);
+
+    var gunImg = document.createElement("img");
+    gunImg.classList = "gun";
+    gunImg.src = "media/revolver-gun-svgrepo-com.png"
+    gunCylinderContainer.appendChild(gunImg);
 
     var barrel = document.createElement("div");
     barrel.classList = "barrel";
@@ -174,89 +162,112 @@ document.addEventListener("DOMContentLoaded", function() {
 
         cylinderDiv.appendChild(bulletHoleDiv);
 
-        
-
         bulletHoleDiv.addEventListener("click", function() {
             if (this.style.backgroundColor != "orange") {
+                activeBullets++;
+                if (activeBullets > 3) {
+                    inputTimes+=0.5;
+                }
                 this.style.backgroundColor = "orange";
+                this.style.backgroundImage = "url(Media/bullet.png)";
                 bulletList[Number(this.id)] = "active";
-                inputTimes+=0.5;
-                inputBetTitle.innerHTML = "Dina " + balance + " KjellBucks multipliceras med " + inputTimes;
+                inputBetTitle.innerHTML = "Dina " + Number(input.value) + " KjellBucks multipliceras med " + inputTimes;
             } else {
-                this.style.backgroundColor = "white";
+                activeBullets--;
+                if (activeBullets > 2) {
+                    inputTimes-=0.5;
+                }
+                this.style.backgroundColor = "";
+                this.style.backgroundImage = ""
                 bulletList[Number(this.id)] = "blank";
-                inputTimes-=0.5;
-                inputBetTitle.innerHTML = "Dina " + balance + " KjellBucks multipliceras med " + inputTimes;
+                inputBetTitle.innerHTML = "Dina " + Number(input.value) + " KjellBucks multipliceras med " + inputTimes;
             }
 
-            if (bulletList.includes("active") && inputBet > 0) {
-                startButton.style.display = "";
+            if (activeBullets > 3 && inputBet > 0) {
+                startButton.classList= "startButtonOn";
             } else {
-                startButton.style.display = "none";
+                startButton.classList= "startButtonOff";
             }
         });
     }
 
+
+
     startButton.addEventListener("click", function() {
-        console.log("inputBet" + inputBet)
-        console.log("inputTimes" + inputTimes)
-        console.log("balance" + balance)
-        if (inputBet <= balance && inputBet > 0) {
-            balance-= inputBet;
-            balanceText.innerHTML = balance
-            bunny.src = "https://i.ibb.co/1nJzcMf/image.png";
-            bunny.style.transform = "rotate(0deg)"
-            document.getElementById("start-button").style.backgroundColor == "red";
+        if (inputTimes >= 1.5 && startButton.classList == "startButtonOn") {
+            startButton.classList = "startButtonOff";
             ranNum = Math.floor(Math.random()*7);
-            console.log(ranNum)
-            startButton.style.display = "none";
-
-            winLose.style.display = "none";
-
             cylinderDiv.style.animationName = list[ranNum];
             cylinderDiv.style.animationDuration = "3s";
-            cylinderDiv.style.animationTimingFunction = "ease-out"
-            cylinderDiv.style.animationFillMode = "forwards"
+            cylinderDiv.style.animationTimingFunction = "ease-out";
+            cylinderDiv.style.animationFillMode = "forwards";
+            balance -= Number(input.value);
+            balanceText.innerHTML = balance;
+            input.value = "";
+            input.style.visibility = "hidden";
+
+            setTimeout(function() {
+                cylinderDiv.style.visibility = "hidden";
+                barrel.style.visibility = "hidden";
+                gunImg.style.visibility = "visible";
+            }, 3500)
 
             setTimeout(function() {
                 cylinderDiv.style.animationName = "";
                 if (bulletList[ranNum] == "active") {
-                    winLose.style.display = "";
-                    winLose.innerHTML = "Du Förlorade!";
                     flashBang.style.animationName = "flash";
                     flashBang.style.animationDuration = "0.05s";
-                    winLose.style.color = "red";
-                    bunny.src = "https://i.ibb.co/h9p2j3W/image.png";
+                    bunny.src = "media/bunnyDead.png";
                     bunny.style.transform = "rotate(180deg)";
+                    gunImg.style.transform = "rotate(-20deg)";
                 } else {
-                    winLose.style.display = "";
-                    winLose.innerHTML = "Du Vann!";
-                    winLose.style.color = "green";
+                    bunny.style.animationName = "bounce";
+                    bunny.style.animationDuration = "1s";
+                    bunny.style.animationIterationCount = "infinite";
+                    setTimeout(function() {
+                        bunny.style.animationName = "";
+                    }, 3000)
                     balance += inputBet*inputTimes;
-                    console.log(inputBet)
                     balanceText.innerHTML = balance;
                 }
-                inputBet = 0;
-                inputAmount.innerHTML = inputBet;
 
-                inputBet = "";
-                inputTimes = 1;
-                inputBetTitle.innerHTML = "Dina " + balance + " KjellBucks multipliceras med " + inputTimes;
-
-                bulletList = ["blank", "blank", "blank", "blank", "blank", "blank", "blank"];
+                restartButton.style.visibility = "visible";
 
                 setTimeout(function() {
                     flashBang.style.animationName = "";
                 }, 500)
-
-                winLose.style.display = "";
-
-                for (var i = 0; i < 7; i++) {
-                    document.getElementById(i).style.backgroundColor = "white"
-                }
-            }, 3000)
-        } else {
-            winLose.innerHTML = "Du har inte tillräckligt";
+            }, 4000)
         }
+    })
+
+    restartButton.addEventListener("click", function() {
+        balance = Number(balanceText.innerHTML);
+
+        input.style.visibility = "visible";
+
+        gunImg.style.transform = "rotate(0deg)";
+
+        inputBet = 0;
+        activeBullets = 0;
+        inputTimes = 1;
+        inputBetTitle.innerHTML = "Dina " + 0 + " KjellBucks multipliceras med " + inputTimes;
+
+        for (var i = 0; i < 7; i++) {
+            document.getElementById(i).style.backgroundColor = "";
+            document.getElementById(i).style.backgroundImage = "";
+        }
+
+        bulletList = ["blank", "blank", "blank", "blank", "blank", "blank", "blank"];
+
+        restartButton.style.visibility = "hidden";
+        startButton.style.classList = "startButtonOff";
+
+        cylinderDiv.style.visibility = "visible";
+        gunImg.style.visibility = "hidden";
+        barrel.style.visibility = "visible";
+
+        bunny.src = "media/bunnyNormal.png";
+        bunny.style.transform = "rotate(0deg)";
+        bunny.style.animationName = "";
     })
 });
